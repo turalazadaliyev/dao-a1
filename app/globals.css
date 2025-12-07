@@ -1,26 +1,313 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0E1034;
+  --bg-dark: #141640;
+  --bg-deeper: #1A1C4E;
+  --surface: #141640;
+  --primary: #4F46E5;
+  --primary-light: #6366F1;
+  --secondary: #14B8A6;
+  --secondary-light: #06B6D4;
+  --accent: #A855F7;
+  --text-default: #F3F4F6;
+  --text-strong: #E2E8F0;
+  --text-muted: #CBD5E1;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  background: #0B0F17;
+  font-family: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* keep box-sizing inheritance but DO NOT reset margins/padding globally
+   so native browser spacing (headings, paragraphs, lists) remains intact */
+*, *::before, *::after {
+  box-sizing: inherit;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Theme properties - Tailwind utilities applied in @layer base below */
+  color: var(--text-strong);
+  overflow-x: hidden;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Base layout rules using plain CSS (avoid @apply compatibility issues) */
+body {
+  background-color: #060a1a;
+  color: #ffffff;
+}
+
+main {
+  max-width: 80rem; /* Tailwind max-w-7xl */
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  main { padding-left: 2.5rem; padding-right: 2.5rem; }
+}
+
+section {
+  padding-top: 5rem; /* ~py-20 */
+  padding-bottom: 5rem;
+}
+
+.section--compact {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-sora), 'Sora', system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  color: var(--text-default);
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.6;
+}
+
+button {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  display: inline-block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Page container defaults */
+main {
+  width: 100%;
+}
+
+/* Optional helper classes */
+.container-safe {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-safe {
+    padding: 0 2.5rem;
+  }
+}
+
+
+/* Glass Morphism */
+.glass {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+}
+
+.glass-hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  transition-property: background-color, border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  cursor: pointer;
+}
+
+.glass-hover:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Gradients */
+.gradient-primary {
+  background: linear-gradient(to right, #A855F7, #00E5FF, #00FFA3);
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #A855F7, #00E5FF, #00FFA3);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.neon-border {
+  border: 1px solid #A855F7;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  transition-property: box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+.neon-border:hover {
+  box-shadow: 0 0 40px rgba(168, 85, 247, 0.5);
+}
+
+.neon-glow {
+  box-shadow: 0 0 30px rgba(109, 93, 246, 0.5);
+}
+
+/* Premium purple glow */
+.purple-glow {
+  box-shadow: 0 0 20px rgba(109, 93, 246, 0.4), 0 0 40px rgba(139, 92, 246, 0.2);
+}
+
+.purple-glow:hover {
+  box-shadow: 0 0 30px rgba(109, 93, 246, 0.6), 0 0 60px rgba(139, 92, 246, 0.3);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #0E1034;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(109, 93, 246, 0.6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #8B5CF6;
+  box-shadow: 0 0 10px rgba(109, 93, 246, 0.4);
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 229, 255, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 1000px 100%;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out forwards;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.5s ease-out forwards;
+}
+
+.animate-slide-in {
+  animation: slide-in 0.5s ease-out forwards;
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* body default is set earlier; keep that and don't override with fallback Arial */

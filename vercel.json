@@ -1,0 +1,15 @@
+{
+  "name": "Quadratic Funding DAO",
+  "description": "Production-grade frontend for decentralized public good funding",
+  "version": "1.0.0",
+  "buildCommand": "next build",
+  "devCommand": "next dev",
+  "framework": "nextjs",
+  "outputDirectory": ".next",
+  "env": {
+    "NEXT_PUBLIC_API_URL": {
+      "description": "Backend API URL",
+      "default": "http://localhost:3001"
+    }
+  }
+}
